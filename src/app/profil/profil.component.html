@@ -1,0 +1,68 @@
+<div class="container" *ngIf="user">
+  <h2>Informations générales</h2>
+
+  <div fxLayout="row" fxLayoutAlign="center center" class="user-info">
+    <img src="../../assets/img_avatar.png" *ngIf="user.civilite === 'Monsieur'" alt="Avatar" class="avatar">
+    <img src="../../assets/img_avatar2.png" *ngIf="user.civilite !== 'Monsieur'" alt="Avatar" class="avatar">
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="info-grid" fxLayout="row wrap" fxLayoutGap="16px">
+    <div class="info-item" *ngFor="let item of userDetails" fxFlex="100" fxFlex.gt-sm="48" fxFlex.gt-md="31">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <img [src]="item.imgSrc" [alt]="item.altText">
+          </div>
+          <mat-card-title>{{ item.label }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p [innerHTML]="item.isDate ? (item.value | customDate) : item.value"></p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="user.coproprietaires.length > 0">
+    <fieldset style="text-align: center;">
+      <legend>Etat des copropriétaires</legend>
+      <button mat-raised-button color="primary"
+        (click)="exportUsersAsXLSX(user.coproprietaires, 'Liste des coproprietaires')">
+        <mat-icon>file_download</mat-icon> Exporter vers Excel
+      </button>
+      <mat-table [dataSource]="user.coproprietaires" class="mat-elevation-z8">
+        <ng-container matColumnDef="numero">
+          <mat-header-cell *matHeaderCellDef> N° </mat-header-cell>
+          <mat-cell *matCellDef="let cop"> {{ cop.numero }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="coproprietaire">
+          <mat-header-cell *matHeaderCellDef> copropriétaire </mat-header-cell>
+          <mat-cell *matCellDef="let cop"> {{ cop.coproprietaire }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="donneescomptable">
+          <mat-header-cell *matHeaderCellDef> Données Comptables </mat-header-cell>
+          <mat-cell *matCellDef="let cop">
+            <div *ngFor="let dcopm of cop.donneescomptable">
+              <div>{{ dcopm.annee }} - {{ dcopm.periodicite }} - {{ dcopm.montant }}</div>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="['numero', 'coproprietaire', 'donneescomptable']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['numero', 'coproprietaire', 'donneescomptable'];"></mat-row>
+      </mat-table>
+    </fieldset>
+  </ng-container>
+
+  <div class="action-buttons" *ngIf="user.usertype === 'Client'">
+    <button mat-raised-button color="accent" class="edit-btn"
+      (click)="getNavigation('modify-user', currentUser.userId)">Modifier</button>
+    <button mat-raised-button color="warn" class="save-btn"
+      (click)="getNavigation('complete-profil', currentUser.userId)" *ngIf="!user.natureactivite || user.natureactivite === 'Autre' || !user.activite || user.activite === 'Autre'
+              || user.regimefiscalimpot === 'Autre' || !user.regimefiscalimpot || !user.matriculefiscale">
+      Compléter
+    </button>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <img src="../../assets/logoMaCompta.png" alt="logo Macompta" class="logoHeader">
+  
+  <ul class="nav-middle">
+    <li class="nav-item">Accueil</li>
+    <li class="nav-item sections" (click)="toggleMenu()" clickOutside (clickOutside)="clickedOutside()">Sections <span class="standing-up">< </span> 
+      <ul class="sections" *ngIf="isMenuOpened" style="display: block; position: absolute; width: 20vw; background-color: white; font-size: 1vw; font-weight: normal;">
+        <li class="sectionChoice">Qui sommes nous ?</li>
+        <li class="sectionChoice">Pourquoi choisir Macompta ?</li>
+        <li class="sectionChoice">Contact</li>
+        <li class="sectionChoice">Carrière</li>
+      </ul>
+    </li>
+  </ul>
+  
+  <div class="nav-right">
+    <button class="boutonSeConnecter">Se connecter</button>
+    <button class="boutonSInscrire">S'inscrire</button>
+  </div>
+</nav>

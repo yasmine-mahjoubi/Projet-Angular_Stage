@@ -1,0 +1,31 @@
+.table {
+    background-color: #f8f9fa;
+    /* Light gray background color */
+    border-collapse: collapse;
+    /* Make sure table borders are collapsed */
+}
+
+.table th,
+.table td {
+    border: 1px solid #dee2e6;
+    /* Border for table cells */
+    padding: 8px;
+    /* Padding for table cells */
+}
+
+.table thead th {
+    background-color: #e9ecef;
+    /* Slightly darker background for the header */
+    color: #212529;
+    /* Dark text color for the header */
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+    /* White background for odd rows */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+    /* Light gray background for even rows */
+}

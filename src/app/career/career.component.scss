@@ -1,0 +1,120 @@
+.container {
+  background-color: #0a1133;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+
+  h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    margin-top: 50px;
+  }
+
+  p {
+    color: white;
+    opacity: 80%;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .form-group1, .form-group2, .form-group3, .form-group4 {
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 15px;
+    width: 350px;
+  }
+  .form-group5 {
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 15px;
+    width: 760px;
+  }
+
+  .form-container {
+    .form-row {
+      .form-group {
+        label {
+          color: white;
+        }
+
+        input, select, textarea {
+          background-color: #f8f9fa;
+          border: 1px solid #ced4da;
+          border-radius: .25rem;
+          padding: .375rem .75rem;
+          margin-top: .25rem;
+          color: #495057;
+
+          &::placeholder {
+            color: #6c757d;
+          }
+        }
+
+        .form-control-file {
+          display: block;
+          width: 100%;
+          padding: .375rem .75rem;
+          margin-top: .25rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          color: #495057;
+          background-color: #f8f9fa;
+          background-clip: padding-box;
+          border: 1px solid #ced4da;
+          border-radius: .25rem;
+        }
+      }
+    }
+
+    .text-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      .btn {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  .button-group {
+    margin-top: 30px;
+  }
+
+  .alert-success {
+    background-color: #f6f9f6;
+    border-color: #c3e6cb;
+    color: #155724;
+  }
+
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .circle-red {
+    width: 180px;
+    height: 200px;
+    background-color: #ff0000;
+    top: -75px;
+    left: -75px;
+    margin-left: 40px;
+  }
+
+  .circle-white {
+    width: 150px;
+    height: 130px;
+    background-color: #ffffff;
+    top: -75px;
+    right: -75px;
+    margin-right: 180px;
+  }
+
+}
+

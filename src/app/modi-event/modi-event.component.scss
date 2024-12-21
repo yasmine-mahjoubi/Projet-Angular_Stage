@@ -1,0 +1,202 @@
+.div {
+  margin: 5vh 20vw;
+  background-color: rgba(233, 242, 253, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 93%;
+  width: 55vw;
+}
+
+.title-container {
+  margin-top: -20%;
+  margin-bottom: 2vh; /* Ajoute un espacement entre le titre et le tableau */
+  white-space: nowrap; /* Empêcher le texte de passer à la ligne */
+}
+
+.centered-title {
+  color: #181F1C;
+  font-family: Calibri, sans-serif;
+  font-weight: bolder;
+  font-size: 2.5vw;
+  text-align: center;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-left: 11%;
+}
+
+.centered-table {
+  width: 40vw; /* Largeur du tableau */
+  border-collapse: collapse; /* Fusionne les bordures des cellules */
+}
+
+td {
+  padding: 2%;
+}
+
+.form-row {
+  display: flex;
+   margin-left: 6%;
+ 
+  width: 100%;
+}
+
+label.div-90 {
+  width: 50%; /* Same width for all labels */
+  text-align: left;
+  font-size: 1vw; /* Adjust font size if needed */
+  font-weight: bold; /* Bold labels */
+  margin-right: -25%;
+   margin-top: 1%;
+  
+}
+
+input.column-20
+ {
+  width: 50%; /* Same width for all inputs */
+  border: none;
+  border-bottom: 2px solid #000; /* Solid and thicker bottom border */
+  
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: transparent; /* Transparent background */
+  outline: none;
+}
+textarea.column-20 {
+  width: 50%; /* Same width for all inputs */
+  border: none;
+  border-bottom: 2px solid #000; /* Solid and thicker bottom border */
+  height: 3vh;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: transparent; /* Transparent background */
+  outline: none;;
+}
+
+textarea.column-20 {
+  resize: vertical;
+}
+.div-19 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Ajustez cette valeur selon vos besoins */
+  padding: 10px; /* Ajoutez du padding pour espacer les boutons du bord */
+  margin-top: 3%;
+}
+
+.btn1,
+.btn2 {
+  
+  
+  color: white; /* Texte en blanc */
+  font-weight: bold;
+  border: none;
+  border-radius: 5px; /* Ajoutez le border-radius */
+  font-size: 0.7rem; /* Ajustez la taille de la police selon vos besoins */
+  cursor: pointer;
+  width: 9%; 
+  text-align: center;;
+}
+
+/* Styles spécifiques pour les boutons */
+.btn1 {
+  background-color: red; /* Bouton "Supprimer" en rouge */
+  margin-left: 30%;
+  padding-right: 1%;
+  padding-left: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.btn2 {
+  background-color: blue; /* Bouton "Ajouter" en bleu */
+  margin-right:35%;
+  padding-right: 1.1%;
+  padding-left: 1.1%;
+  padding-top: 1.1%;
+  padding-bottom: 1.1%;
+
+}
+
+/* Ajoutez de l'espace fixe entre les boutons */
+.btn1 + .btn2 {
+  margin-left: 20px; /* Ajustez cette valeur selon la distance souhaitée */
+}
+.text
+{
+  margin-top: 6%;
+  font-weight:bold;
+}
+ .form-image
+ {
+
+  width: 10%;
+  height: 7%;
+  margin-top: 3%;
+}
+.charge
+{
+  
+  font-weight: bold;
+  color: #676767;
+  /* flex-grow: 1; */
+  flex-basis: auto;
+  font: ontserrat, sans-serif;
+  /* margin-right: -500px; */
+  /* margin-left: 20%; */
+  font-size: 1vw;
+  height: 5vh;
+  text-align: left;
+  margin-left: 0%;
+  margin-top: 3%;
+  cursor: pointer;
+  
+}
+.voir
+{
+  color: #d81b1b;
+    /* flex-grow: 1; */
+    /* flex-basis: auto; */
+    font: 700 30px Montserrat, sans-serif;
+    text-decoration: underline;
+    font-weight: bolder;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 1vw;
+    margin-left: 35%;
+    margin-top: -4.8vh; cursor: pointer;}
+    .btn3 {
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      width: 9%;
+      text-align: center;
+      background-color: blue;
+      margin-right: 35%;
+      padding-right: 1.1%;
+      padding-left: 1.1%;
+      padding-top: 1.1%;
+      padding-bottom: 1.1%;
+      margin-left: 56.5%;
+      margin-top: 5%;
+      margin-bottom: -16%;
+     
+  }
+  .union
+  {
+    margin-bottom: -20%;
+    width: 7%;
+    height: 6%;
+    margin-top: 21%;
+    margin-left: -41%;
+
+  }

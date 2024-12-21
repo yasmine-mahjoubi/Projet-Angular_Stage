@@ -1,0 +1,14 @@
+<form [formGroup]="fichierDeclarationForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="enregistrements">
+    <div *ngFor="let enregistrement of enregistrements.controls; let i = index" [formGroupName]="i">
+      <input formControlName="field1" placeholder="Field 1">
+      <input formControlName="field2" placeholder="Field 2">
+      <input formControlName="field3" placeholder="Field 3">
+      <input formControlName="field4" placeholder="Field 4">
+      <input formControlName="value1" placeholder="Value 1">
+      <input formControlName="value2" placeholder="Value 2">
+    </div>
+  </div>
+  <button (click)="addEnregistrement()" type="button">Add Enregistrement</button>
+  <button type="submit">Submit</button>
+</form>

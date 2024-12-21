@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="back-icon">
+      <a (click)="goBack()">
+        <span class="material-icons">arrow_back</span> Back
+      </a>
+    </div>
+    <div class="container">
+      <h1 class="text-center mt-5 text-danger text-decoration-none fs-2">
+        Formulaire De Modification Des Données Utilisateurs
+      </h1>
+
+      <p class="mt-4">
+        <a
+          class="text-primary text-decoration-none fs-3"
+          data-bs-toggle="collapse"
+          href="#multiCollapseExample1"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample1"
+        >
+          Informations générales :
+        </a>
+      </p>
+
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse show" id="multiCollapseExample1">
+            <form class="row g-3 ps-4">
+              <div class="row">
+                <div class="col-md-6 mb-3 mt-4">
+                  <mat-checkbox
+                    class="example-margin"
+                    [checked]="true"
+                    (change)="onCheckboxChange($event)"
+                  >
+                    <a class="text-decoration-none" routerLink="/affForm">
+                      <span class="text-success-emphasis fs-5">
+                        Afficher le formulaire de paramêtrage comptable
+                      </span>
+                    </a>
+                  </mat-checkbox>
+                </div>
+                <div class="col-md-6 mb-3 mt-4">
+                  <mat-checkbox
+                    class="example-margin"
+                    (change)="onCheckboxChange2($event)"
+                  >
+                    <a class="text-decoration-none" routerLink="/inclureP">
+                      <span class="text-success-emphasis fs-5">
+                        Inclure parametrage dans la facturation
+                      </span>
+                    </a>
+                  </mat-checkbox>
+                </div>
+
+                <mat-tab-group class="mt-3">
+                  <mat-tab label="Edition note honoraire">
+                    <div class="container">
+                      <div class="row mt-5">
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Journal</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte DT</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte hors taxe</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte TVA</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte TTC</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault04" class="form-label"
+                            >Taux TVA</label
+                          >
+                          <select
+                            class="form-select"
+                            id="validationDefault04"
+                            required
+                          >
+                            <option>7%</option>
+                            <option>13%</option>
+                            <option>19%</option>
+                            <option>exonere</option>
+                            <option>export</option>
+                            <option>suspension</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-12 mt-4">
+                        <span
+                          class="material-icons add-button"
+                          (click)="addFields()"
+                          >add_circle</span
+                        >
+                      </div>
+                      <div id="dynamic-fields"></div>
+                    </div>
+                  </mat-tab>
+                  <mat-tab label="Recette journalière"
+                    ><div class="container">
+                      <div class="row mt-5">
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Journal</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte DT</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte hors taxe</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte TVA</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte TTC</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault04" class="form-label"
+                            >Taux TVA</label
+                          >
+                          <select
+                            class="form-select"
+                            id="validationDefault04"
+                            required
+                          >
+                            <option>7%</option>
+                            <option>13%</option>
+                            <option>19%</option>
+                            <option>exonere</option>
+                            <option>export</option>
+                            <option>suspension</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-tab>
+                  <mat-tab label="Achat">
+                    <div class="container">
+                      <div class="row mt-5">
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Journal</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte DT</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault04" class="form-label"
+                            >Fournisseur</label
+                          >
+                          <select
+                            class="form-select"
+                            id="validationDefault04"
+                            required
+                          >
+                            <option>XX</option>
+                            <option>YY</option>
+                            <option>ZZ</option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte TVA</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte TTC</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault04" class="form-label"
+                            >Taux TVA</label
+                          >
+                          <select
+                            class="form-select"
+                            id="validationDefault04"
+                            required
+                          >
+                            <option>7%</option>
+                            <option>13%</option>
+                            <option>19%</option>
+                            <option>exonere</option>
+                            <option>export</option>
+                            <option>suspension</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault04" class="form-label"
+                            >Nature d'Achat</label
+                          >
+                          <select
+                            class="form-select"
+                            id="validationDefault04"
+                            required
+                          >
+                            <option>XX</option>
+                            <option>YY</option>
+                            <option>ZZ</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte hors taxe</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte hors taxe devise</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </mat-tab>
+                  <mat-tab label="Relevé manuel">
+                    <div class="container">
+                      <div class="row mt-5">
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Journal</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Compte DT</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Numero du compte</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                        <div class="col-md-4 mt-4">
+                          <label for="validationDefault02" class="form-label"
+                            >Banque</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationDefault02"
+                            value=""
+                            required
+                          />
+                        </div>
+                      </div></div
+                  ></mat-tab>
+
+                  <mat-tab label="Relevé joint"> Content 3 </mat-tab>
+                  <mat-tab label="Salaire"> Content 3 </mat-tab>
+                </mat-tab-group>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-danger me-3" type="submit">Valider</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

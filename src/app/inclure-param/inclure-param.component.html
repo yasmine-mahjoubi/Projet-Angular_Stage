@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulaire de Modification des Données Utilisateurs</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mt-5 text-danger text-decoration-none fs-2">
+        Formulaire De Modification Des Données Utilisateurs
+      </h1>
+
+      <p class="mt-4">
+        <a
+          class="text-primary text-decoration-none fs-3"
+          data-bs-toggle="collapse"
+          href="#multiCollapseExample1"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample1"
+        >
+          Informations générales :
+        </a>
+      </p>
+
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse show" id="multiCollapseExample1">
+            <form class="row g-3 ps-4">
+              <div class="row">
+                <div class="col-md-6 mb-4 mt-4">
+                  <mat-checkbox
+                    class="example-margin"
+                    (change)="onCheckboxChange2($event)"
+                  >
+                    <a class="text-decoration-none" routerLink="/affForm">
+                      <span class="text-success-emphasis fs-5">
+                        Afficher le formulaire de paramêtrage comptable
+                      </span>
+                    </a>
+                  </mat-checkbox>
+                </div>
+                <div class="col-md-6 mb-4 mt-4">
+                  <mat-checkbox
+                    class="example-margin"
+                    [checked]="true"
+                    (change)="onCheckboxChange($event)"
+                  >
+                    <a class="text-decoration-none" routerLink="/inclureP">
+                      <span class="text-success-emphasis fs-5">
+                        Inclure parametrage dans la facturation
+                      </span>
+                    </a>
+                  </mat-checkbox>
+                </div>
+
+                <table class="table table-responsive table-hover mt-3 mb-5">
+                  <thead>
+                    <tr>
+                      <th class="text-danger fs-4 fw-normal">Prenom</th>
+                      <th class="text-danger fs-4 fw-normal">Nom</th>
+                      <th class="text-danger fs-4 fw-normal">Mois</th>
+                      <th class="text-danger fs-4 fw-normal">Annee</th>
+                      <th class="text-danger fs-4 fw-normal">Type</th>
+                      <th class="text-danger fs-4 fw-normal">Origine</th>
+                      <th class="text-danger fs-4 fw-normal">
+                        Date de creation
+                      </th>
+                      <th class="text-danger fs-4 fw-normal">
+                        date de modification
+                      </th>
+                      <th class="text-danger fs-4 fw-normal">Confirmation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Omar</td>
+                      <td>Abdelkader</td>
+                      <td>01</td>
+                      <td>2024</td>
+                      <td>Comptabilité</td>
+                      <td>Origine</td>
+                      <td>2024-06-04T19:15:52.137Z</td>
+                      <td>2024-07-09T19:15:52.137Z</td>
+                      <td class="te">☑</td>
+                    </tr>
+                    <tr>
+                      <td>Omar</td>
+                      <td>Abdelkader</td>
+                      <td>01</td>
+                      <td>2024</td>
+                      <td>Comptabilité</td>
+                      <td>Origine</td>
+                      <td>2024-06-04T19:15:52.137Z</td>
+                      <td>2024-07-09T19:15:52.137Z</td>
+                      <td class="te">☑</td>
+                    </tr>
+                    <tr>
+                      <td>Omar</td>
+                      <td>Abdelkader</td>
+                      <td>01</td>
+                      <td>2024</td>
+                      <td>Comptabilité</td>
+                      <td>Origine</td>
+                      <td>2024-06-04T19:15:52.137Z</td>
+                      <td>2024-07-09T19:15:52.137Z</td>
+                      <td class="te">☑</td>
+                    </tr>
+                    <tr>
+                      <td>Omar</td>
+                      <td>Abdelkader</td>
+                      <td>01</td>
+                      <td>2024</td>
+                      <td>Comptabilité</td>
+                      <td>Origine</td>
+                      <td>2024-06-04T19:15:52.137Z</td>
+                      <td>2024-07-09T19:15:52.137Z</td>
+                      <td class="te">☑</td>
+                    </tr>
+                    <tr>
+                      <td>Omar</td>
+                      <td>Abdelkader</td>
+                      <td>01</td>
+                      <td>2024</td>
+                      <td>Comptabilité</td>
+                      <td>Origine</td>
+                      <td>2024-06-04T19:15:52.137Z</td>
+                      <td>2024-07-09T19:15:52.137Z</td>
+                      <td class="te">☑</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="col-md-6 mb-3">
+                  <label for="validationDefaultActivity" class="form-label"
+                    >Nature Utilisateur</label
+                  >
+                  <select
+                    class="form-select"
+                    id="validationDefaultActivity"
+                    required
+                  >
+                    <option>Personne Physique</option>
+                    <option>Personne Morale</option>
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="validationDefault04" class="form-label"
+                    >Civilité</label
+                  >
+                  <select class="form-select" id="validationDefault04" required>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationDefault02" class="form-label"
+                    >Raison Sociale</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefault02"
+                    value="Otto"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Nom</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault01"
+                  value="Mark"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefault02" class="form-label"
+                  >Prénom</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault02"
+                  value="Otto"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultUsername" class="form-label"
+                  >N° mobile</label
+                >
+                <div class="input-group">
+                  <input
+                    type="Number"
+                    class="form-control"
+                    id="validationDefaultUsername"
+                    aria-describedby="inputGroupPrepend2"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefault03" class="form-label"
+                  >Adresse Activité</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault03"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefault04" class="form-label"
+                  >Email</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault03"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="validationDefaultActivity" class="form-label"
+                  >Type Utilisateur</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultActivity"
+                  required
+                >
+                  <option>Client</option>
+                  <option>Collaborateur</option>
+                  <option>Candidat</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="inputPassword5" class="form-label"
+                  >Periode d'impayé</label
+                >
+                <input
+                  type="password"
+                  id="inputPassword5"
+                  class="form-control"
+                  aria-describedby="passwordHelpBlock"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault02" class="form-label"
+                  >Code Client</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault02"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefault02" class="form-label">Role</label>
+                <select
+                  class="form-select"
+                  id="validationDefaultActivity"
+                  required
+                >
+                  <option>Admin</option>
+                  <option>Basic</option>
+                  <option>Superviseur</option>
+                </select>
+              </div>
+
+              <div class="col-5 example-section">
+                <label class="form-label ms-5">Possede role superviseur</label>
+                <mat-checkbox class="example-margin" id="pf"
+                  >Autorisé</mat-checkbox
+                >
+
+                <mat-checkbox class="example-margin">Non Autorisé</mat-checkbox>
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault02" class="form-label"
+                  >Code Postal</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault02"
+                  required
+                />
+              </div>
+              <div class="col-6 example-section">
+                <label class="form-label"
+                  >Droit à la saisie pour son compte</label
+                >
+                <mat-checkbox class="example-margin" id="pf"
+                  >Autorisé</mat-checkbox
+                >
+
+                <mat-checkbox class="example-margin">Non Autorisé</mat-checkbox>
+              </div>
+              <div class="col-6 example-section">
+                <label class="form-label">Droit à la comptabilité</label>
+                <mat-checkbox class="example-margin" id="pf"
+                  >Autorisé</mat-checkbox
+                >
+
+                <mat-checkbox class="example-margin">Non Autorisé</mat-checkbox>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-4">
+        <a
+          class="text-primary text-decoration-none fs-3"
+          data-bs-toggle="collapse"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample2"
+          href="#multiCollapseExample3"
+        >
+          Informations spécifique :
+        </a>
+      </p>
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample3">
+            <form class="row g-3 ps-4">
+              <div class="row">
+                <div class="col-md-6 mb-3 mt-3">
+                  <label for="validationDefaultActivity" class="form-label"
+                    >Taux TVA</label
+                  >
+                  <select
+                    class="form-select"
+                    id="validationDefaultActivity"
+                    required
+                  >
+                    <option>7%</option>
+                    <option>13%</option>
+                    <option>19%</option>
+                    <option>exonere</option>
+                    <option>export</option>
+                    <option>suspension</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-4">
+        <a
+          class="text-primary text-decoration-none fs-3"
+          data-bs-toggle="collapse"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample1"
+          href="#multiCollapseExample2"
+        >
+          Informations supplémentaires :
+        </a>
+      </p>
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <form class="row g-3 ps-4 pt-5">
+              <div class="col-md-4 mb-3">
+                <label for="validationDefaultActivity" class="form-label"
+                  >Nature Utilisateur</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultActivity"
+                  required
+                >
+                  <option>Personne Physique</option>
+                  <option>Personne Morale</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultActivity" class="form-label"
+                  >Activité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultActivity"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="datePicker" class="form-label">Date d'Effet</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="datePicker"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultSubActivity" class="form-label"
+                  >Sous-Activité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultSubActivity"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultSpecialty" class="form-label"
+                  >Spécialité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultSpecialty"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultSubSpecialty" class="form-label"
+                  >Sous-Spécialité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultSubSpecialty"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefaultDirectTaxes" class="form-label"
+                  >Régime Fiscal En Matière D'impôts Directs</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultDirectTaxes"
+                  required
+                >
+                  <option>Reel</option>
+                  <option>Fofait d'assiette</option>
+                  <option>Non soumis</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefaultVAT" class="form-label"
+                  >Régime Fiscal En Matière de TVA</label
+                >
+                <select class="form-select" id="validationDefaultVAT" required>
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefaultTaxID" class="form-label"
+                  >Matricule fiscale</label
+                >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxID"
+                    required
+                  />
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                  <span class="input-group-text">/</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                  <span class="input-group-text">/</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                  <span class="input-group-text">/</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group mt-3">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="inputGroupFile01"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-danger me-3" type="submit">
+              Envoyer Modification
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

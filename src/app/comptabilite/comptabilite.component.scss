@@ -1,0 +1,113 @@
+
+.c{
+   margin-left: 15%;
+   margin-top: 17%;
+
+}
+
+
+
+h1{font-size: 24px;
+    font-weight:bolder;
+    line-height: 25px;
+    font-family: Roboto, sans-serif;
+    letter-spacing: normal;
+    margin-left: 10%;
+    margin-top: 10%;
+    margin-bottom: -10%;
+    color:#8C1C13;
+    }
+    
+    
+   
+    
+    .scallable-table
+    {
+        height:350px;
+        overflow-y: auto;
+        margin-right: 22%;
+        padding-right: 10px;
+        margin-top: 10%;
+        scroll-snap-type: y mandatory;
+        margin-left: 10%;
+    }
+    .scallable-table > .table{
+        width:90%;
+    }
+    .tableng
+    {
+        font-family:'Inter' , sans-serif;
+      
+        font-size: 10px;
+        
+        margin-left: 15%;
+        height:60%;
+     
+    }
+    .table th{
+         
+        color: black ;
+        font-weight: bold;
+        text-align: left;
+        position:sticky;
+        top:0;
+        border-bottom: 2px solid blue; /* Ligne bleue sous l'en-tête */
+    }
+    .table tr {
+        scroll-snap-align: start;
+    }
+    .table th , .table td {
+        padding: 2px 4px ;
+        
+        height: 10%;
+       
+    }
+    .table th:nth-child(10) {
+    /* Adjust the width as needed */
+    width: 200px; /* Example width */
+}
+    .table tbody tr:nth-of-type(even) {
+        color: #C0E0DE;
+        color: black; /* Mettre le texte en noir pour le rendre visible */
+    }
+    
+    .table tbody tr:nth-of-type(odd) {
+        background-color: white; /* Arrière-plan blanc pour les lignes impaires */
+        color: black;
+    }
+    .table thead + tbody tr:first-child {
+        border-top: 2px solid blue;
+    }
+     
+      .table td:last-child {
+       /* Ajustez cette valeur pour compenser la largeur de la barre de défilement */
+        padding-right: 0; /* Ajoutez un padding pour l'espace entre la dernière colonne et la barre de défilement */
+        font-size: 9px;
+         
+    }
+    .btn {
+        background-color: white;
+        color:#8C1C13;
+        border:#8C1C13 solid;
+       width:5vw;
+       height: 5vh;
+        padding: auto;
+        font-size: 14px;
+        font-weight: bolder;
+        cursor: pointer;
+        margin-left: 10%;
+        margin-top: 2%;
+        border-radius: 10px;
+      }
+      .btn2 {
+        border-radius: 4px;
+        border-color: rgba(0, 176, 135, 1);
+        border-style: solid;
+        border-width: 1px;
+    color: #00B087  ;
+    font-weight: bold;
+        background-color: rgba(22, 192, 152, 0.38);
+        min-height: 29px;
+        max-width: 83px;
+        margin-top: 4vh;;
+      }

@@ -1,0 +1,47 @@
+<nav class="navbar">
+  <img src="../../assets/logoMaCompta.png" alt="logo Macompta" class="logoHeader">
+  
+  <ul class="nav-middle">
+    <li class="nav-item">Accueil</li>
+    <div clickOutside (clickOutside)="clickedOutside();">
+    <li class="nav-item sections" (click)="toggleMenu();">Sections   <span class="standing-up">&lt;</span>
+      <ul class="sections" *ngIf="isMenuOpened" style="display: block; position: absolute; width: 20vw; background-color: white; font-size: 1vw; font-weight: normal;">
+        <li class="sectionChoice">Qui sommes nous ?</li>
+        <li class="sectionChoice">Pourquoi choisir Macompta ?</li>
+        <li class="sectionChoice">Contact</li>
+        <li class="sectionChoice">Carrière</li>
+      </ul>
+    </li>
+  </div>
+    <li class="nav-item" (click)="openUserSpace();" clickOutside (clickOutside)="clickedOutsideUserSpace();">Espace utilisateur <span class="standing-up">&lt;</span>
+      <ul style="position: absolute; background-color: white; font-size: 1vw;">
+        <li *ngIf="isUserSpaceOpened" class="sectionChoice" style=" font-weight: normal; color: black;"><p>Tableau de bord utilisateur</p></li>
+      </ul>
+    </li>
+    <li class="nav-item" (click)="openServices();" clickOutside (clickOutside)="clickedOutsideServices();">Services en lignes <span class="standing-up">&lt;</span>
+      <ul *ngIf="isServicesOpened" style="font-size: 1vw; display: block; position: absolute;  width: fit-content; background-color:white;">
+        <li class="sectionChoice" style="font-weight: normal; color: black;"><p>Tenez votre comptabilité</p></li>
+        <li class="sectionChoice" style="font-weight: normal; color: black;"><p>Etablissez vos déclarations fiscales</p></li>
+        <li class="sectionChoice" style="font-weight: normal; color: black;"><p>Préparez vos fiches de paie</p></li>
+        <li class="sectionChoice" style="font-weight: normal; color: black;"><p>Demandez un conseil</p></li>
+      </ul>
+    </li>
+  </ul>
+  
+  <div class="nav-right">
+    <div style="margin-right: 30%;" clickOutside (clickOutside)="clickedOutsideNotif();">
+    <img src="../../assets/notificationIcon.png" alt="notification icon" style="width: 3.7vw; height: 2.15vw; margin-right: 25%; display: inline;" (click)="displayNotif()">
+    <ul class="sections" *ngIf="isNotifOpened" style="display: block; position: absolute; width: 20vw; background-color: white; font-size: 1vw; font-weight: normal;" >
+      <li style="font-size: 1vw; display: block; position: absolute;  width: fit-content; background-color:white;" class="notificationChoice"><p>Voir tous les ds à payer </p></li>
+    </ul>
+  </div>
+
+  <div style="margin-right: 30%;" clickOutside (clickOutside)="clickedOutsideProfile();">
+    <img src="../../assets/profileIcon.png" alt="profil icon" style="width: 4vw; height: 2.6vw; display: inline;" (click)="openProfile()">
+    <ul class="sections" *ngIf="isProfileOpened" style="display: block; position: absolute; width: 20vw; background-color: white; font-size: 1vw; font-weight: normal;" >
+      <li style="font-size: 1vw;  width: fit-content; background-color:white;" class="notificationChoice"><img src="../../assets/AymenProfilePic.png" alt="Profile picture" style="width:13%"><b style="margin-left: 5%;">Aymen Belhadj</b> </li>
+      <li style="font-size: 1vw;  width: 40%; background-color:white;"> <p style="margin-left: 0%; padding-left: 5%;" class="sectionChoice">Déconnexion</p> </li>
+    </ul>
+  </div>
+  </div>
+</nav>

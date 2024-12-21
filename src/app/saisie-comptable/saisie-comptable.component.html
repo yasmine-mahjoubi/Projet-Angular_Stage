@@ -1,0 +1,278 @@
+<div class="container">
+  <!-- Navigation Steps -->
+  <div class="steps-navigation">
+    <span [class.active]="step === 1" class="step-circle" [class.completed]="step > 1">1</span>
+    <span [class.active]="step === 2" class="step-circle" [class.completed]="step > 2">2</span>
+    <span [class.active]="step === 3" class="step-circle">3</span>
+  </div>
+
+  <!-- Step 1: Choix de l'année et du mois -->
+  <div *ngIf="step === 1" class="step-container">
+    <h2>Choix de l'année et du mois</h2>
+    <div class="form-group">
+      <select id="year" [(ngModel)]="selectedYear" (change)="onYearChange()">
+        <option [ngValue]="null" disabled selected>Sélectionner année</option>
+        <option *ngFor="let year of years" [ngValue]="year">{{ year }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select id="month" [(ngModel)]="selectedMonth" (change)="onMonthChange()" [disabled]="!selectedYear">
+        <option [ngValue]="null" disabled selected>Sélectionner mois</option>
+        <option *ngFor="let month of months" [ngValue]="month">{{ month }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Step 2: Liste des données à saisir -->
+  <div *ngIf="step === 2" class="step-container">
+    <h2>Liste des données à saisir</h2>
+    <label *ngFor="let data of dataList" class="form-group2">
+      <input type="checkbox" [(ngModel)]="data.selected" (change)="onDataSelect(data)" />
+      {{ data.name }}
+    </label>
+  </div>
+
+  <!-- Step 3: Détails de la saisie -->
+  <div *ngIf="step === 3" class="step-container">
+    <div class="tabs">
+      <button *ngFor="let data of dataList" 
+              [disabled]="!data.selected" 
+              (click)="selectTab(data.name)">
+        {{ data.name }}
+      </button>
+    </div>
+
+    <div *ngIf="selectedData === 'Chiffre d\'affaires'">
+      <!-- Partie chiffre d'affaires -->
+      <p>Factures du mois</p>
+      <div class="div">
+        <!-- Tableau pour chiffre d'affaires -->
+        <table class="salary-table">
+          <thead>
+            <tr>
+              <th>N° piece</th>
+              <th>Jour</th>
+              <th>Date complète</th>
+              <th>Type</th>
+              <th>N°</th>
+              <th>Montant TVA</th>
+              <th>Droit de timbre</th>
+              <th>Montant TTC</th>
+              <th>Client</th>
+              <th>Annuler</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" placeholder="1" matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000" [matTooltipDisabled]="!isTextOverflow('1')"/></td>
+              <td><input type="text" placeholder="Jour" matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000" [matTooltipDisabled]="!isTextOverflow('Jour')"/></td>
+              <td><input type="text" placeholder="Date" matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000" [matTooltipDisabled]="!isTextOverflow('Date')"/></td>
+              <td>
+                <select matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000">
+                  <option value=""></option>
+                  <option value="alm">Facture</option>
+                  <option value="S">Avoir</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="0" matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000" [matTooltipDisabled]="!isTextOverflow('0')"/></td>
+              <td><input type="text" placeholder="0" matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000" [matTooltipDisabled]="!isTextOverflow('0')"/></td>
+              <td><input type="text" placeholder="0.000" matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000" [matTooltipDisabled]="!isTextOverflow('0.000')"/></td>
+              <td><input type="text" placeholder="0.000" matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000" [matTooltipDisabled]="!isTextOverflow('0.000')"/></td>
+              <td>
+                <select matTooltip="Tooltip avec un texte long pour démonstration" [matTooltipShowDelay]="1000">
+                  <option value=""></option>
+                  <option value="S">Autre</option>
+                </select>
+              </td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td colspan="5"><strong>Total</strong></td>
+              <td><input type="text" placeholder="0.000"/></td>
+              <td><input type="text" placeholder="0.000"/></td>
+              <td><input type="text" placeholder="0.000"/></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="add-btn" (click)="addRow()">Ajouter</button>
+      </div>
+    </div>
+
+    <div *ngIf="selectedData === 'Achats'">
+      <h2>Détails de la saisie - Achats</h2>
+      <div class="details-container">
+        <table class="salary-table">
+          <thead>
+            <tr>
+              <th>N° pièce</th>
+              <th>Jour</th>
+              <th>Date complète</th>
+              <th>Fournisseur</th>
+              <th>Type pièce</th>
+              <th>N°</th>
+              <th>Nature de l'achat</th>
+              <th>Montant HT</th>
+              <th>Montant devise</th>
+              <th>Montant TVA</th>
+              <th>Droit de timbre</th>
+              <th>Montant TTC</th>
+              <th>Moyen de règlement</th>
+              <th>Contient Document</th>
+              <th>Documents joints</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of achatsData; let i = index">
+              <td><input type="text" [(ngModel)]="achatsData[i].numeroPiece" placeholder="N° pièce" /></td>
+              <td><input type="text" [(ngModel)]="achatsData[i].jour" placeholder="Jour" /></td>
+              <td><input type="text" [(ngModel)]="achatsData[i].dateComplete" placeholder="Date complète" /></td>
+              <td>
+                <select [(ngModel)]="achatsData[i].fournisseur">
+                  <option value=""></option>
+                  <option value="S">Autre</option>
+                </select>
+              </td>
+              <td>
+                <select [(ngModel)]="achatsData[i].typePiece">
+                  <option value="">Facture</option>
+                  <option value="S">Autre</option>
+                </select>
+              </td>
+              <td><input type="text" [(ngModel)]="achatsData[i].numero" placeholder="N°" /></td>
+              <td>
+                <select [(ngModel)]="achatsData[i].natureAchat">
+                  <option value=""></option>
+                  <option value="S">Autre</option>
+                </select>
+              </td>
+              <td><input type="text" [(ngModel)]="achatsData[i].montantHT" placeholder="0.000" /></td>
+              <td>
+                <select [(ngModel)]="achatsData[i].devise">
+                  <option value="TND">TND</option>
+                  <option value="EURO">EURO</option>
+                  <option value="GBP">GBP</option>
+                  <option value="USD">USD</option>
+                  <option value="DZD">DZD</option>
+                  <option value="SAR">SAR</option>
+                </select>
+                <input type="text" [(ngModel)]="achatsData[i].montantDevise" placeholder="0.000" />
+              </td>
+              <td><input type="text" [(ngModel)]="achatsData[i].montantTVA" placeholder="0.000" /></td>
+              <td><input type="text" [(ngModel)]="achatsData[i].droitTimbre" placeholder="0" /></td>
+              <td><input type="text" [(ngModel)]="achatsData[i].montantTTC" placeholder="0.000" /></td>
+              <td>
+                <select [(ngModel)]="achatsData[i].moyenPaiement">
+                  <option value="TND"></option>
+                  <option value="EURO">Espèce</option>
+                  <option value="GBP">Chèque</option>
+                  <option value="USD">Traite</option>
+                  <option value="DZD">Non réglé</option>
+                </select>
+              </td>
+              <td><input type="checkbox" [(ngModel)]="achatsData[i].contientDocument" /></td>
+              <td><input type="file" [(ngModel)]="achatsData[i].documentsJoints" /></td>
+              <td><button (click)="removeRow('achats', i)">Supprimer</button></td>
+            </tr>
+            <tr>
+              <td colspan="7"><strong>Total</strong></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="add-btn" (click)="addRow('achats')">Ajouter</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedData === 'Banques'">
+      <h2>Détails de la saisie - Banques</h2>
+      <div class="details-container">
+        <div class="choix-banques">
+          <h3>Veuillez choisir le mode de saisie des relevés bancaires :</h3>
+          <button (click)="setMode('manual')" class="btn-manual">Saisie Manuelle</button>
+          <button (click)="setMode('upload')" class="btn-upload">Téléchargement de document</button>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedData === 'Salaires'">
+      <h2>Détails de la saisie - Salaires</h2>
+      <div class="details-container">
+        <p>Type salaire :</p>
+        <select>
+          <option value="0">Choisir</option>
+          <option value="1">Mensuel</option>
+          <option value="2">15 Jours</option>
+          <option value="3">Ponctuel</option>
+        </select>
+        <table class="salary-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>CIN</th>
+              <th>Date début</th>
+              <th>Date fin</th>
+              <th>Salaire brut</th>
+              <th>Prime</th>
+              <th>CNSS</th>
+              <th>Salaire imposable</th>
+              <th>IRPP</th>
+              <th>Salaire net</th>
+              <th>Moyen de paiement</th>
+              <th>Contient document</th>
+              <th>Documents joints</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of salairesData; let i = index">
+              <td><input type="text" [(ngModel)]="salairesData[i].nom" placeholder="Nom" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].prenom" placeholder="Prénom" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].cin" placeholder="CIN" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].dateDebut" placeholder="Date début" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].dateFin" placeholder="Date fin" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].salaireBrut" placeholder="0.000" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].prime" placeholder="0.000" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].cnss" placeholder="0.000" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].salaireImposable" placeholder="0.000" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].irpp" placeholder="0.000" /></td>
+              <td><input type="text" [(ngModel)]="salairesData[i].salaireNet" placeholder="0.000" /></td>
+              <td>
+                <select [(ngModel)]="salairesData[i].moyenPaiement">
+                  <option value="TND">Chèque</option>
+                  <option value="EURO">Espèce</option>
+                  <option value="GBP">Virement</option>
+                  <option value="USD">Traite</option>
+                </select>
+              </td>
+              <td><input type="checkbox" [(ngModel)]="salairesData[i].contientDocument" /></td>
+              <td><input type="file" [(ngModel)]="salairesData[i].documentsJoints" /></td>
+              <td><button (click)="removeRow('salaires', i)">Supprimer</button></td>
+            </tr>
+            <tr>
+              <td colspan="5"><strong>Total</strong></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+              <td><input type="text" placeholder="0.000" disabled /></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="add-btn" (click)="addRow('salaires')">Ajouter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="buttons">
+    <button *ngIf="step > 1" (click)="previousStep()" class="btn-suivant"><--</button>
+    <button *ngIf="step < 3" (click)="nextStep()" [disabled]="!isNextEnabled()" class="btn-suivant">--></button>
+    <button *ngIf="step === 3" (click)="saveData()" >Sauvegarder</button>
+    <button *ngIf="step >= 2" (click)="reset()" class="btn-r">Réinitialiser</button>
+  </div>
+</div>

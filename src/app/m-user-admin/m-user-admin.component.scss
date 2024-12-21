@@ -1,0 +1,131 @@
+.page-container {
+  padding: 16px;
+}
+
+h1 {
+  margin-bottom: 24px;
+}
+
+.tab-content {
+  padding: 16px;
+}
+
+.spinner-grow {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: text-bottom;
+  border: 0.25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-grow 0.75s linear infinite;
+}
+
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.input-container {
+  margin-top: 16px;
+}
+.button-container {
+  position: absolute;
+  bottom: 50px; /* Adjust as needed for spacing from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.fa-spin {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.custom-file-upload {
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px 20px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
+}
+.input-row {
+  display: flex;
+  align-items: center;
+}
+
+.input-row input {
+  flex: 1; /* Distribute available space evenly among inputs */
+  margin-right: 5px; /* Adjust margin-right as needed */
+  border: 1px solid #ccc; /* Set border for all inputs */
+  padding: 8px; /* Add padding inside each input */
+  min-width: 0; /* Allow inputs to shrink below their intrinsic width */
+  box-sizing: border-box; /* Include padding and border in input's total width */
+}
+
+.input-row input:not(:last-child) {
+  border-right: none; /* Remove right border for all inputs except the last one */
+}
+
+.validation-messages {
+  margin-top: 8px; /* Adjust margin-top as needed */
+  font-size: 12px; /* Adjust font size as needed */
+  color: #f44336; /* Error message color */
+}
+
+.mat-error {
+  font-size: 12px; /* Adjust font size as needed */
+  color: #f44336; /* Error message color */
+}
+
+/* Optional: Style for invalid inputs */
+.is-invalid {
+  border-color: #f44336; /* Red border for invalid inputs */
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Example margin-bottom */
+  /* Add more styles as needed */
+}
+
+/* Styling for table headers */
+table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Styling for table cells */
+table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+/* styles.scss */
+
+td input {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding and border are included in the width */
+}

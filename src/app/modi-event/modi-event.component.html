@@ -1,0 +1,57 @@
+<div class="div">
+  <div class="title-container">
+    <h1 class="centered-title">Modifier  évènement</h1>
+</div>
+   
+<div class="table-container">
+    <table class="centered-table">
+        <tr>
+          <td>
+            <div class="form-row">
+              <label class="div-90">Date</label>
+              <input class="column-20" type="date" value="05-02-2024">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-row">
+              <label class="div-90">Evènement</label>
+              <input class="column-20" type="text" value="Vignette pour les P.M">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-row">
+              <label class="div-90">Commentaire</label>
+              <textarea class="column-20"   > seul pour les voitures </textarea>
+            </div>
+          </td>
+        </tr>
+      </table>
+</div> 
+<div class="div-19">
+    <button class="btn1">supprimer</button>
+    <button class="btn2">modifier</button>
+  </div>
+  <div class="text">
+    Insérer plusieurs évènement fiscales et comptables 
+  </div>
+  
+    <img
+              
+    src="assets/fichierb.png"
+    class="form-image" width="6vw" height="8vh"
+  />
+  <div class="charge" (click)="triggerFileInput()">Charger document</div>
+  <input type="file" id="fileInput" style="display: none;"  accept=".xls, .xlsx"   (change)="onFileSelected($event)" />
+  <div class="voir" (click)="openExcelFile()">Voir structure</div>
+     
+  <button class="btn3">valider</button>
+  <img
+              
+  src="assets/union.png"
+  class="union" width="6vw" height="8vh"
+/>
+</div>

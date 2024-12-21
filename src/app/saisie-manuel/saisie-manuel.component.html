@@ -1,0 +1,213 @@
+<div class="container">
+    <!-- Navigation Steps -->
+    <div class="steps-navigation">
+      <span class="step-circle completed">1</span>
+      <span class="step-circle completed">2</span>
+      <span class="step-circle active">3</span>
+    </div>
+  
+    <!-- Step 3: Détails de la saisie -->
+    <div *ngIf="step === 2" class="step-container">
+      <h2>Liste des données à saisir</h2>
+      <label *ngFor="let data of dataList" class="form-group2">
+        <input type="checkbox" [(ngModel)]="data.selected" (change)="onDataSelect(data)" />
+        {{ data.name }}
+      </label>
+    </div>
+  
+    <!-- Step 3: Détails de la saisie -->
+    <div *ngIf="step === 3" class="step-container">
+      <label *ngFor="let data of dataList" class="form-group2">
+        <input type="checkbox" [(ngModel)]="data.selected" (change)="onDataSelect(data)" />
+        {{ data.name }}
+      </label>
+      <div [ngSwitch]="selectedData">
+  
+        <!-- Partie chiffre d'affaires -->
+        <div *ngSwitchCase="'Chiffre d\'affaires'">
+          <h2>Chiffre d'affaires</h2>
+        </div>
+  
+        <!-- Partie Achats -->
+        <div *ngSwitchCase="'Achats'">
+          <h2>Achats</h2>
+  
+        </div>
+  
+        <!-- Partie banques-->
+        <div class="salary-management" *ngSwitchCase="'Banques'">
+          <p>Saisie de relevés manuels</p>
+          <div class="div">
+            <p>Détails de compte N° 0 :</p>
+            <!-- table 1-->
+            <table class="salary-table">
+              <thead>
+                <tr>
+                  <th>Banques</th>
+                  <th>N° compte</th>
+                  <th>Devise</th>
+                  <th>Débit</th>
+                  <th>Crédit</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><select>
+                    <option value=""></option>
+                    <option value="autre">Autre</option>
+                  </select></td>
+                  <td><select>
+                    <option value=""></option>
+                    <option value="autre">Autre</option>
+                  </select></td>
+                  <td>
+                    <select>
+                    <option value="TND">TND</option>
+                    <option value="EURO">EURO</option>
+                    <option value="GBP">GBP</option>
+                    <option value="USD">USD</option>
+                    <option value="DZD">DZD</option>
+                    <option value="SAR">SAR</option>
+                    </select>
+                </td>
+                  <td><input type="text"  /></td>
+                  <td><input type="text" /></td>
+                  <td>
+                    <button class="delete-btn" (click)="deleteSalary(i)">X</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3"><strong>Solde à la fin de mois précédent</strong></td>
+                  <td>Montant HT</td>
+                  <td><input type="text" placeholder="0.000"/></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div>
+              <p></p>
+            </div>
+            <!-- table 2-->
+            <table class="salary-table">
+              <thead>
+                <tr>
+                  <th>Jour de l'operation</th>
+                  <th>Date de l'operation</th>
+                  <th>Désignation</th>
+                  <th>Débit</th>
+                  <th>Crédit</th>
+                  <th>Objet débit</th>
+                  <th>Objet Crédit</th>
+                  <th>Contient tiers</th>
+                  <th>Fournisseur/client</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="text"  placeholder="Jour"/></td>
+                  <td><input type="text"  placeholder="Date"/></td>
+                  <td><input type="text"  placeholder="Désignation"/></td>
+                  <td><input type="text"  placeholder="0.000"/></td>
+                  <td><input type="text" placeholder="0.000"/></td>
+                  <td>
+                    <select>
+                    <option value=""></option>
+                    <option value="alm">alimentation caisse</option>
+                    <option value="E">blocage</option>
+                    <option value="G">comission et agios</option>
+                    <option value="Uu">impayé client</option>
+                    <option value="DZ">reglement cnss</option>
+                    <option value="SA">reglement Fournisseur</option>
+                    <option value="U">reglement impot</option>
+                    <option value="D">reglement salaire</option>
+                    <option value="S">autre</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select>
+                    <option value=""></option>
+                    <option value="E">déblocage</option>
+                    <option value="G">remise chéque</option>
+                    <option value="Uu">reglement impayé</option>
+                    <option value="S">autre</option>
+                    </select>
+                  </td>
+                  <td><input type="checkbox"  /></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td colspan="3"><strong>Total</strong></td>
+                  <td><input type="text" placeholder="0.000"/></td>
+                  <td><input type="text" placeholder="0.000"/></td>
+                  <td><input type="text" placeholder="0.000"/></td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="add-btn" (click)="addSalary()"></button>
+          </div>
+          <button class="add-btn0" (click)="addSalaryGroup()">Ajouter compte</button>
+        </div>
+  
+        <!-- Partie Salaires -->
+        <div class="salary-management" *ngSwitchCase="'Salaires'">
+          <p>Gestion des salaires</p>
+          <div class="div">
+            <p>Type de Salaire :</p>
+            <div class="salary-form-header">
+              <label></label>
+              <select [(ngModel)]="salaryType" (change)="onSalaryTypeChange()">
+                <option value=""></option>
+                <option value="paie normal">Paie normal</option>
+                <option value="prime">Prime</option>
+                <option value="remuneration">Réménuration</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div *ngIf="salaryType === 'autre'">
+              <input type="text" placeholder="Décrire le type de salaire" [(ngModel)]="otherSalaryType" />
+            </div>
+            <table class="salary-table">
+              <thead>
+                <tr>
+                  <th>Matricule</th>
+                  <th>Nom et prénom</th>
+                  <th>Nature du contrat</th>
+                  <th>Fiche contrat</th>
+                  <th>Salaire Brut</th>
+                  <th>Salaire Net</th>
+                  <th>Actions fiche</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let salary of salaries; let i = index">
+                  <td><input type="text" [(ngModel)]="salary.matricule" placeholder="Matricule" /></td>
+                  <td><input type="text" [(ngModel)]="salary.nomPrenom" placeholder="Nom Prenom" /></td>
+                  <td><input type="text" [(ngModel)]="salary.natureContrat" placeholder="client" /></td>
+                  <td><input type="text" [(ngModel)]="salary.ficheContrat" /></td>
+                  <td><input type="number" [(ngModel)]="salary.salaireBrut" /></td>
+                  <td><input type="number" [(ngModel)]="salary.salaireNet" /></td>
+                  <td>
+                    <button class="modify-btn" (click)="modifySalary(i)">Modifier</button>
+                    <button class="delete-btn" (click)="deleteSalary(i)">Supprimer</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4"><strong>Total</strong></td>
+                  <td><strong>{{ calculateTotal('salaireBrut') }}</strong></td>
+                  <td><strong>{{ calculateTotal('salaireNet') }}</strong></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="add-btn" (click)="addSalary()">Ajouter</button>
+          </div>
+          <button class="add-btn0" (click)="addSalaryGroup()">Ajouter autre type de salaire</button>
+        </div>
+      </div>
+      
+      <button (click)="reset()" class="btn-reset">Réinitialiser</button>
+      <button (click)="save()">Sauvegarder</button>
+    </div>
+  </div>
+  

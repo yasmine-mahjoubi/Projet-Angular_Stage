@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulaire de Modification des Données Utilisateurs</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mt-5 text-danger text-decoration-none fs-2">
+        Formulaire De Modification Des Données Utilisateurs
+      </h1>
+
+      <p class="mt-4">
+        <a
+          class="text-primary text-decoration-none fs-3"
+          data-bs-toggle="collapse"
+          href="#multiCollapseExample1"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample1"
+        >
+          Informations générales :
+        </a>
+      </p>
+
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse show" id="multiCollapseExample1">
+            <form class="row g-3 ps-4 pt-5">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="validationDefaultActivity" class="form-label"
+                    >Nature Utilisateur</label
+                  >
+                  <select
+                    class="form-select"
+                    id="validationDefaultActivity"
+                    required
+                  >
+                    <option>Personne Physique</option>
+                    <option>Personne Morale</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="validationDefault04" class="form-label"
+                    >Civilité</label
+                  >
+                  <select class="form-select" id="validationDefault04" required>
+                    <option>Monsieur</option>
+                    <option>Madame</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Nom</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault01"
+                  value="Mark"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefault02" class="form-label"
+                  >Prénom</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault02"
+                  value="Otto"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultUsername" class="form-label"
+                  >N° mobile</label
+                >
+                <div class="input-group">
+                  <input
+                    type="Number"
+                    class="form-control"
+                    id="validationDefaultUsername"
+                    aria-describedby="inputGroupPrepend2"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefault03" class="form-label"
+                  >Adresse</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault03"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefault04" class="form-label"
+                  >Email</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault03"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="inputPassword5" class="form-label">
+                  changer Mot de passe</label
+                >
+                <input
+                  type="password"
+                  id="inputPassword5"
+                  class="form-control"
+                  value="************"
+                  aria-describedby="passwordHelpBlock"
+                />
+                <div id="passwordHelpBlock" class="form-text">
+                  Votre mot de passe doit comporter entre 8 et 20 caractères,
+                  contenir des lettres et chiffres et ne doit pas contenir
+                  d'espaces, de caractères spéciaux ou émoji.
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label for="inputPassword5" class="form-label"
+                  >Confirmer Mot de passe</label
+                >
+                <input
+                  type="password"
+                  id="inputPassword5"
+                  class="form-control"
+                  aria-describedby="passwordHelpBlock"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault02" class="form-label"
+                  >Code Client</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault02"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-4">
+        <a
+          class="text-primary text-decoration-none fs-3"
+          data-bs-toggle="collapse"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample2"
+        >
+          Informations spécifique :
+        </a>
+      </p>
+
+      <p class="mt-4">
+        <a
+          class="text-primary text-decoration-none fs-3"
+          data-bs-toggle="collapse"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample1"
+          href="#multiCollapseExample2"
+        >
+          Informations supplémentaires :
+        </a>
+      </p>
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <form class="row g-3 ps-4 pt-5">
+              <div class="col-md-4">
+                <label for="validationDefaultName" class="form-label"
+                  >Nom</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefaultName"
+                  value="Mark"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultActivity" class="form-label"
+                  >Activité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultActivity"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="datePicker" class="form-label">Date d'Effet</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="datePicker"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultSubActivity" class="form-label"
+                  >Sous-Activité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultSubActivity"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultSpecialty" class="form-label"
+                  >Spécialité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultSpecialty"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultSubSpecialty" class="form-label"
+                  >Sous-Spécialité</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultSubSpecialty"
+                  required
+                >
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefaultDirectTaxes" class="form-label"
+                  >Régime Fiscal En Matière D'impôts Directs</label
+                >
+                <select
+                  class="form-select"
+                  id="validationDefaultDirectTaxes"
+                  required
+                >
+                  <option>Reel</option>
+                  <option>Fofait d'assiette</option>
+                  <option>Non soumis</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefaultVAT" class="form-label"
+                  >Régime Fiscal En Matière de TVA</label
+                >
+                <select class="form-select" id="validationDefaultVAT" required>
+                  <option>...</option>
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefaultTaxID" class="form-label"
+                  >Matricule fiscale</label
+                >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxID"
+                    required
+                  />
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                  <span class="input-group-text">/</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                  <span class="input-group-text">/</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                  <span class="input-group-text">/</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultTaxIDPart2"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group mt-3">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="inputGroupFile01"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-6">
+          <!-- Colonne pour aligner à gauche -->
+        </div>
+        <div class="col-6">
+          <!-- Colonne pour aligner à droite et en dessous -->
+          <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-danger me-3" type="submit">Valider</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,291 @@
+<div class="parametrage-admin">
+  <h1>Gestion Calendrier Fiscale</h1>
+  <div class="line"></div>
+
+  <div class="card">
+    <h2>Paramétrage des autres DS</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Libellé</th>
+          <th>Durée</th>
+          <th>Soumis/Non soumis</th>
+          <th>Modification</th>
+          <th>Suppression</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of otherDS">
+          <td><input type="text" [(ngModel)]="item.label"></td>
+          <td><input type="text" [(ngModel)]="item.duration"></td>
+          <td><input type="checkbox" [(ngModel)]="item.isSubmitted"></td>
+          <td><button class="edit-btn">Modifier</button></td>
+          <td><button class="delete-btn">Supprimer</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Paramétrage des actualités</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Commentaire</th>
+          <th>Rang</th>
+          <th>Document joint</th>
+          <th>Consultation</th>
+          <th>Modification</th>
+          <th>Suppression</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let news of newsList">
+          <td>{{ news.title }}</td>
+          <td>{{ news.comment }}</td>
+          <td>{{ news.rank }}</td>
+          <td><a href="{{ news.documentUrl }}" target="_blank">Aperçu</a></td>
+          <td><button class="view-btn">Consulter</button></td>
+          <td><button class="edit-btn">Modifier</button></td>
+          <td><button class="delete-btn">Supprimer</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Paramétrage des tarifs</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Type tarif</th>
+          <th>Date début</th>
+          <th>Date fin</th>
+          <th>Utilisateur</th>
+          <th>Nature utilisateur</th>
+          <th>Nature activité</th>
+          <th>Activité</th>
+          <th>Sous-activité</th>
+          <th>Régime impôt</th>
+          <th>Prix</th>
+          <th>Consultation</th>
+          <th>Modification</th>
+          <th>Suppression</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tarif of tarifsList">
+          <td>{{ tarif.type }}</td>
+          <td>{{ tarif.startDate }}</td>
+          <td>{{ tarif.endDate }}</td>
+          <td>{{ tarif.user }}</td>
+          <td>{{ tarif.userNature }}</td>
+          <td>{{ tarif.activityNature }}</td>
+          <td>{{ tarif.activity }}</td>
+          <td>{{ tarif.subActivity }}</td>
+          <td>{{ tarif.taxRegime }}</td>
+          <td>{{ tarif.price }}</td>
+          <td><button class="view-btn">Consulter</button></td>
+          <td><button class="edit-btn">Modifier</button></td>
+          <td><button class="delete-btn">Supprimer</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button class="supprimer-tous-btn">Supprimer Tous</button>
+
+  <div class="card">
+    <h2>Paramétrage des relations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Mobile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let relation of relationsList">
+          <td>{{ relation.firstName }}</td>
+          <td>{{ relation.lastName }}</td>
+          <td>{{ relation.mobile }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card small-card">
+    <table>
+      <tbody>
+        <tr>
+          <td>Afficher le formulaire d'ajouts d'actualités</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>Afficher le formulaire d'ajouts d'utilisateurs</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>Afficher le formulaire d'ajouts de tarifs</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>Afficher le formulaire d'ajouts des relations</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>Afficher le formulaire d'envoi des sms</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>Afficher le formulaire de paramétrage des autres DS</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>Afficher le formulaire de clôture des exercices</td>
+          <td><input type="checkbox"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="parametrage-change">
+    <h1>Paramétrage du cours de change</h1>
+    <div class="filter-section">
+      <div class="filter-group">
+        <h2>Filtrer les cours de change</h2>
+        <div class="filter-item">
+          <label for="superieur">Supérieur à</label>
+          <input type="date" class="date-input">
+ 
+        </div>
+        <div class="filter-item">
+          <label for="inferieur">Inférieur à</label>
+          <input type="date" class="date-input">
+        </div>
+        <button class="search-btn">Chercher <img class="icon" src="../../assets/recherche.png"> </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="exchange-table-container">
+    <table class="exchange-table">
+      <thead>
+        <tr>
+          <th>Date cours</th>
+          <th>USD</th>
+          <th>Euro</th>
+          <th>GBP</th>
+          <th>DZD</th>
+          <th>SAR</th>
+          <th>CAD</th>
+          <th>DKK</th>
+          <th>JPY</th>
+          <th>MAD</th>
+          <th>NOK</th>
+          <th>SEK</th>
+          <th>CHF</th>
+          <th>KWD</th>
+          <th>AED</th>
+          <th>LYD</th>
+          <th>MRU</th>
+          <th>BHD</th>
+          <th>QAR</th>
+          <th>CNY</th>
+          <th>Fichier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="date" class="date-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td>
+            <div class="form-group">
+              <!-- <label for="file">Attacher Fichier</label> -->
+              <input type="file" id="file" name="file" />
+            </div>
+            <!-- <button class="delete-button">&#10060;</button> -->
+          </td>
+        </tr>
+        <tr>
+          <td><input type="date" class="date-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td><input type="text" class="rate-input"></td>
+          <td class="flex-container">
+             
+              <input type="file" id="file" name="file" />
+            
+            <button class="delete-button"><img src="../../assets/supprimer.png" ></button>
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    
+    <div class="slider">
+      <table class="slider-table">
+        <tr>
+          <td>560</td>
+          <td>520</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td><button class="delete-button"><img src="../../assets/supprimer.png" ></button></td>
+        </tr>
+      </table>
+  
+      <!-- <button class="delete-btn">-</button> -->
+    </div>
+    <div class="buttons">
+      <button class="ajouter-btn">Ajouter</button>
+      <button class="valider-btn">Valider</button>
+    </div>
+  </div>
+  
+
+</div>

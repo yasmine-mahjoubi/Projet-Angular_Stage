@@ -1,0 +1,1240 @@
+<div class="page-container" *ngIf="user">
+  <h1>Modification des Données Utilisateurs</h1>
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Modification Données Signalétiques">
+      <div class="tab-content">
+        <!-- Content for Modification Données Signalétiques -->
+        <p>Here you can modify the signaletic data.</p>
+        <mat-tab-group (selectedTabChange)="onTabChangesdonnessignaletique($event)">
+          <form  [formGroup]="userForm">
+          <mat-tab label="Informations générales">
+            <ng-template mat-tab-label>
+              <div class="col" style="margin-left: 20px;">Informations générales</div>
+            </ng-template>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Type utilisateur</mat-label>
+                        <mat-select formControlName="usertype" placeholder="Entrer Votre Type Utilisateur">
+                          <mat-option value="Client">Client</mat-option>
+                          <mat-option value="Collaborateur">Collaborateur</mat-option>
+                          <mat-option value="Candidat">Candidat</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <div *ngIf="userForm.get('usertype').value !== 'Candidat'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Nature utilisateur</mat-label>
+                          <mat-select formControlName="nature" placeholder="Entrer la nature de l'utilisateur">
+                            <mat-option value="Personne Physique">Personne Physique</mat-option>
+                            <mat-option value="Personne Morale">Personne Morale</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group" *ngIf="userForm.get('nature').value === 'Personne Morale'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Raison Sociale</mat-label>
+                          <input matInput type="text" placeholder="Modifier Votre Raison Sociale" formControlName="raisonsociale">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Civilité</mat-label>
+                        <mat-select formControlName="civilite" placeholder="Modifier Votre Civilité">
+                          <mat-option value="Monsieur">Monsieur</mat-option>
+                          <mat-option value="Madame">Madame</mat-option>
+                          <mat-option value="Mademoiselle">Mademoiselle</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <label class="col-md-4 control-label"
+                          *ngIf="userForm.get('nature').value === 'Personne Physique' || userForm.get('nature').value === 'Personne Morale'">
+                          Nom Utilisateur</label>
+                        <div class="col-md-8 inputGroupContainer">
+                          <mat-form-field appearance="fill">
+                            <input matInput type="text" placeholder="Modifier Votre Nom" formControlName="lastname">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <label class="col-md-4 control-label"
+                          *ngIf="userForm.get('nature').value === 'Personne Physique' || userForm.get('nature').value === 'Personne Morale'">
+                          Prénom Utilisateur</label>
+                        <div class="col-md-8 inputGroupContainer">
+                          <mat-form-field appearance="fill">
+                            <input matInput type="text" placeholder="Modifier Votre Prenom" formControlName="firstname">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Code Postal</mat-label>
+                        <input matInput type="text" placeholder="Modifier Votre Code Postal" formControlName="codepostal"
+                          [ngClass]="{ 'is-invalid': submitted && userForm.get('codepostal').errors }">
+                        <mat-error *ngIf="submitted && userForm.get('codepostal').errors">
+                          Code Postal en 4 caractères
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Adresse Activité</mat-label>
+                        <input matInput type="text" placeholder="Modifier Votre Adresse d'activité" formControlName="adresseactivite">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Code Client</mat-label>
+                        <input matInput type="text" placeholder="Code Client" formControlName="clientcode">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >
+                      <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" placeholder="Entrez Votre Email" formControlName="email"
+                          (change)="emailconfirmwithotp()">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Numéro Mobile</mat-label>
+                        <input matInput type="text" placeholder="Entrez Votre Numéro Mobile" formControlName="mobile"
+                          (change)="mobileconfirmwithotp()">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Role</mat-label>
+                        <mat-select formControlName="role" placeholder="Possède role superviseur">
+                          <mat-option value="supervisor">Supervisor</mat-option>
+                          <mat-option value="basic">Basic</mat-option>
+                          <mat-option value="admin">Admin</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Possède role superviseur</mat-label>
+                        <mat-select formControlName="rolesuperviseur" placeholder="Possède role superviseur">
+                          <mat-option value="Autorisé">Autorisé</mat-option>
+                          <mat-option value="Non Autorisé">Non Autorisé</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Droit à la saisie pour son compte</mat-label>
+                        <mat-select formControlName="droitsaisie" placeholder="Droit à la saisie pour son compte">
+                          <mat-option value="Autorisé">Autorisé</mat-option>
+                          <mat-option value="Non Autorisé">Non Autorisé</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Droit à la comptabilité</mat-label>
+                        <mat-select formControlName="droitcompta" placeholder="Droit à la comptabilité">
+                          <mat-option value="Autorisé">Autorisé</mat-option>
+                          <mat-option value="Non Autorisé">Non Autorisé</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>             
+          </mat-tab>
+          <mat-tab label="Informations spécifiques">
+            <ng-template mat-tab-label>
+              <div class="col" style="margin-left: 20px;">Informations spécifiques</div>
+            </ng-template>          
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="form-group" *ngIf="natsociete">
+                        <mat-checkbox formControlName="export">Etes vous totalement exportateur: Oui</mat-checkbox>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <div *ngIf="tot || userForm.controls['export'].value === true">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Déclaration d'investissement</mat-label>
+                            <input matInput type="file" (change)="onImagePick2($event)" accept="application/pdf">
+                            <a mat-button *ngIf="user.ficheUrl2" href="{{user.ficheUrl2}}" target="_blank">Aperçu DI</a>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group" *ngIf="natsociete">
+                        <mat-checkbox formControlName="salaire">Avez vous une matricule CNSS: Oui</mat-checkbox>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>         
+              <table [formGroup]="tvaafficheform">
+                <thead>
+                  <tr>
+                    <th>Taux TVA</th>
+                    <th>Applicabilité</th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="ammounts12">
+                  <tr *ngFor="let ammount of ammountControls12; let i = index;" [formGroupName]="i">
+                    <td style="width: 150px;">
+                      <mat-form-field appearance="fill" style="max-width: 130px;">
+                        <mat-label>Taux TVA</mat-label>
+                        <input matInput type="text" formControlName="tauxtva" placeholder="Taux TVA" readonly>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-checkbox formControlName="affiche">Applicabilité</mat-checkbox>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </mat-tab>
+          <mat-tab label="Informations supplémentaires">
+            <ng-template mat-tab-label>
+              <div class="col" style="margin-left: 20px;">Informations supplémentaires</div>
+            </ng-template>       
+              <table>
+                <tbody>
+                  <tr *ngIf="sal || userForm.controls['salaire'].value == true">
+                    <td>
+                      <div class="form-group">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Matricule CNSS</mat-label>
+                          <input matInput type="text" placeholder="Renseigner la matricule cnss" formControlName="matriculecnss">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Taux de la charge patronale</mat-label>
+                          <input matInput type="text" placeholder="Renseigner le taux de la charge patronale" formControlName="tauxchargepatronale">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Taux de l'accident de travail</mat-label>
+                          <input matInput type="text" placeholder="Renseigner le taux de l'accident de travail" formControlName="tauxaccidenttravail">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Régime horaire</mat-label>
+                          <input matInput type="text" placeholder="Renseigner le régime horaire" formControlName="regimehoraire">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group" *ngIf="user.usertype == 'Client'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Nature D'activité</mat-label>
+                          <mat-select formControlName="activitynature" (selectionChange)="update0($event)">
+                            <mat-option [value]="user.natureactivite">{{user.natureactivite}}</mat-option>
+                            <mat-option *ngFor="let natactivite of natureactivites" [value]="natactivite">{{natactivite}}</mat-option>
+                            <mat-option value="Autre">Autre</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group" *ngIf="userForm.controls['activitynature'].value == 'Autre'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Nature D'activité</mat-label>
+                          <input matInput type="text" placeholder="Renseigner votre nature d'activité" formControlName="selectactivitynature">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group" *ngIf="user.usertype == 'Client'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Activité</mat-label>
+                          <mat-select formControlName="activity" (selectionChange)="update($event)">
+                            <mat-option [value]="user.activite">{{user.activite}}</mat-option>
+                            <mat-option *ngFor="let activite of activites" [value]="activite">{{activite}}</mat-option>
+                            <mat-option value="Autre" *ngIf="userForm.controls['activitynature'].value != 'association et syndic'">Autre</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group" *ngIf="userForm.controls['activity'].value == 'Autre'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Activité</mat-label>
+                          <input matInput type="text" placeholder="Renseigner votre activité" formControlName="selectactivity">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group" *ngIf="user.usertype == 'Client'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Date d'effet</mat-label>
+                          <input matInput type="date" placeholder="Modifier Votre Date d'effet" formControlName="dateeffet">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-group" *ngIf="user.usertype == 'Client'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Sous-Activité</mat-label>
+                          <mat-select formControlName="underactivity" (selectionChange)="update2($event)">
+                            <mat-option [value]="user.sousactivite">{{user.sousactivite}}</mat-option>
+                            <mat-option *ngFor="let sousactivite of sousactivites" [value]="sousactivite">{{sousactivite}}</mat-option>
+                            <mat-option value="Autre">Autre</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group" *ngIf="userForm.controls['underactivity'].value == 'Autre'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Sous-Activité</mat-label>
+                          <input matInput type="text" placeholder="Renseigner votre Sous-Activité" formControlName="selectunderactivity">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group" *ngIf="user.usertype == 'Client'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Spécialité</mat-label>
+                          <mat-select formControlName="specialite" (selectionChange)="update3($event)">
+                            <mat-option [value]="user.specialite">{{user.specialite}}</mat-option>
+                            <mat-option *ngFor="let specialite of specialites" [value]="specialite">{{specialite}}</mat-option>
+                            <mat-option value="Autre">Autre</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group" *ngIf="user.usertype == 'Client'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Sous-Spécialité</mat-label>
+                          <mat-select formControlName="sousspecialite">
+                            <mat-option [value]="user.sousspecialite">{{user.sousspecialite}}</mat-option>
+                            <mat-option *ngFor="let sousspecialite of sousspecialites" [value]="sousspecialite">{{sousspecialite}}</mat-option>
+                            <mat-option value="Autre">Autre</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >
+                      <div class="form-group" *ngIf="user.usertype == 'Client' && userForm.controls['nature'].value == 'Personne Physique'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Régime Fiscal En Matière D'impôts Directs</mat-label>
+                          <mat-select formControlName="fiscalimpot">
+                            <mat-option [value]="user.regimefiscalimpot">{{user.regimefiscalimpot}}</mat-option>
+                            <mat-option value="Réel">Réel</mat-option>
+                            <mat-option value="Forfait D'assiette">Forfait D'assiette</mat-option>
+                            <mat-option value="Non soumis" *ngIf="userForm.controls['activitynature'].value != 'Profession Libérale'">Non soumis</mat-option>
+                            <mat-option value="Autre">Autre</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group" *ngIf="userForm.controls['fiscalimpot'].value == 'Autre'">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Régime Fiscal En Matière D'impôts Directs</mat-label>
+                          <input matInput type="text" placeholder="Renseigner votre régime fiscal" formControlName="selectfiscalimpot">
+                        </mat-form-field>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group" *ngIf="user.usertype == 'Client'">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                          <mat-label>Régime Fiscal En Matière de TVA</mat-label>
+                          <mat-select id="regfiscal" formControlName="fiscaltvaassobli" (click)="sort()" name="specialite">
+                            <mat-option hidden [value]="user.regimefiscaltva">{{user.regimefiscaltva}}</mat-option>
+                            <mat-option value=""></mat-option>
+                            <mat-option *ngFor="let fiscaltvaassobli of fiscaltvaassoblis" [value]="fiscaltvaassobli">
+                              {{fiscaltvaassobli}}
+                            </mat-option>
+                            <mat-option hidden value="Autre">Autre</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </td> 
+                  </tr>
+                  <tr>
+                    <td *ngIf="user.activite == 'Syndic des copropriétaires' || userForm.controls['activity'].value == 'Syndic des copropriétaires'">
+                      <div class="form-group">
+                        <mat-checkbox id="choice4" formControlName="matfiscale">Avez-vous une matricule fiscale?</mat-checkbox>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                      <label class="col-md-4 control-label"> Carte d'identification fiscale</label>
+                      <div class="col-md-8 inputGroupContainer">
+                         <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-asterisk" style="color: red;"></i></span>
+                            <input type="file" style="border: 1px solid red" #filePicker (change)="onImagePick($event)" class="form-control" accept="application/pdf">
+                            <b *ngIf="user.ficheUrl"><a href="{{user.ficheUrl}}" target="_blank">Aperçu CIF</a></b>
+                          </div>
+                      </div>
+                      </div>
+                    </td> 
+                    <td *ngIf="user.activite !== 'Syndic des copropriétaires' || 
+                    userForm.controls['activity'].value !== 'Syndic des copropriétaires' || 
+                    mat || 
+                    userForm.controls['matfiscale'].value" colspan="2">
+            <div class="input-container" style="width: 100%;">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Matricule Fiscale</mat-label>
+                <div class="input-row" style="display: flex; width: 100%;">
+                  <input matInput style="flex: 15; margin-right: 5px;" type="text" id="fiscalmat" formControlName="fiscalmat" [ngClass]="{ 'is-invalid': f.fiscalmat.errors }" maxlength="7">
+                  <input matInput style="flex: 2; margin-right: 5px;" type="text" id="fiscalmatletter" formControlName="fiscalmatletter" [ngClass]="{ 'is-invalid': f.fiscalmatletter.errors }" maxlength="1">
+                  <input matInput style="flex: 2; margin-right: 5px;" type="text" id="fiscalmatinchanged" formControlName="fiscalmatinchanged" [ngClass]="{ 'is-invalid': f.fiscalmatinchanged.errors }" maxlength="1">
+                  <input matInput style="flex: 2; margin-right: 5px;" type="text" id="fiscalmatinchanged2" formControlName="fiscalmatinchanged2" [ngClass]="{ 'is-invalid': f.fiscalmatinchanged2.errors }" maxlength="1">
+                  <input matInput style="flex: 6;" type="text" id="fiscalmatnumbers" formControlName="fiscalmatnumbers" [ngClass]="{ 'is-invalid': f.fiscalmatnumbers.errors }" maxlength="3">
+                </div>
+                
+                <div class="validation-messages">
+                  <mat-error *ngIf="f.fiscalmat.errors">
+                    <div *ngIf="f.fiscalmat.errors.pattern">Veuillez saisir les 7 premiers chiffres</div>
+                    <div *ngIf="f.fiscalmat.errors.required">1ère partie obligatoire</div>
+                  </mat-error>
+                  <mat-error *ngIf="f.fiscalmatletter.errors">
+                    <div *ngIf="f.fiscalmatletter.errors.pattern">Veuillez saisir la lettre majuscule qui suit les chiffres</div>
+                    <div *ngIf="f.fiscalmatletter.errors.required">2ème partie obligatoire</div>
+                  </mat-error>
+                  <mat-error *ngIf="f.fiscalmatinchanged.errors">
+                    <div *ngIf="f.fiscalmatinchanged.errors.pattern">Veuillez saisir une première lettre majuscule</div>
+                    <div *ngIf="f.fiscalmatinchanged.errors.required">1ère lettre obligatoire</div>
+                  </mat-error>
+                  <mat-error *ngIf="f.fiscalmatinchanged2.errors">
+                    <div *ngIf="f.fiscalmatinchanged2.errors.pattern">Veuillez saisir une deuxième lettre majuscule</div>
+                    <div *ngIf="f.fiscalmatinchanged2.errors.required">2ème lettre obligatoire</div>
+                  </mat-error>
+                  <mat-error *ngIf="f.fiscalmatnumbers.errors">
+                    <div *ngIf="f.fiscalmatnumbers.errors.pattern">Veuillez saisir les 3 derniers chiffres</div>
+                    <div *ngIf="f.fiscalmatnumbers.errors.required">3ème partie obligatoire</div>
+                  </mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+          </td>
+          
+          
+         
+                  </tr>
+                  <tr *ngIf="user.activite == 'Syndic des copropriétaires' || userForm.controls['activity'].value == 'Syndic des copropriétaires'">
+                    <fieldset>
+                      <legend>Liste des copropriétaires</legend>
+                      <p>Veuillez respecter la forme suivante du fichier excel à rattacher :</p>
+                      <p>1ère colonne: numero &nbsp; 2ème colonne: coproprietaire</p>
+                      <td >
+                        <div class="form-group row">
+                          <mat-form-field class="example-full-width">
+                            <mat-label>Charger document</mat-label>
+                            <input type="file" class="form-control inputFile" accept=".xls, .xlsx" (change)="onFileChange($event)">
+                          </mat-form-field>
+                        </div>
+                        <table mat-table [dataSource]="copform.controls.ammounts13.controls" class="mat-elevation-z8">
+                          <ng-container matColumnDef="numero">
+                            <th mat-header-cell *matHeaderCellDef>Numéro</th>
+                            <td mat-cell *matCellDef="let ammount; let i = index">
+                              <mat-form-field class="example-full-width">
+                                <input matInput formControlName="numero" placeholder="numero" (change)="check(i)">
+                                <mat-error *ngIf="ammount.get('numero').errors && ammount.get('numero').touched">
+                                  <div *ngIf="ammount.get('numero').hasError('required')">Numéro est requis</div>
+                                </mat-error>
+                              </mat-form-field>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="coproprietaire">
+                            <th mat-header-cell *matHeaderCellDef>Copropriétaire</th>
+                            <td mat-cell *matCellDef="let ammount; let i = index">
+                              <mat-form-field class="example-full-width">
+                                <textarea matInput formControlName="coproprietaire" placeholder="coproprietaire"></textarea>
+                                <mat-error *ngIf="ammount.get('coproprietaire').errors && ammount.get('coproprietaire').touched">
+                                  <div *ngIf="ammount.get('coproprietaire').hasError('required')">Copropriétaire est requis</div>
+                                </mat-error>
+                              </mat-form-field>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>Actions</th>
+                            <td mat-cell *matCellDef="let ammount; let i = index">
+                              <button mat-icon-button color="warn" (click)="removeammount13(i)">
+                                <mat-icon>remove_circle</mat-icon>
+                              </button>
+                              <button mat-icon-button color="primary" (click)="addammount13(i)">
+                                <mat-icon>add_circle</mat-icon>
+                              </button>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                      </td>
+                    </fieldset>
+                  </tr>
+                  
+                </tbody>
+              </table>
+          </mat-tab>
+        </form>
+        </mat-tab-group>
+      </div>
+      <button class="btn btn-success"[disabled]="userForm.invalid" (click)="onSubmit()" ><mat-icon *ngIf="loading" class="fa-spin">autorenew</mat-icon>Envoyer Modification</button>
+    </mat-tab>
+    <mat-tab label="Paramêtrage Comptable">
+      <p *ngIf="!showparamcomptable">Mise à jour du paramêtrage comptable...</p>
+      <!-- Loading spinner -->
+      <div class="spinner-grow" role="status" *ngIf="!showparamcomptable">
+        <span class="visually-hidden">loading...</span>
+      </div>
+      <div class="tab-content" *ngIf="showparamcomptable">
+        <!-- Content for Paramêtrage Comptable -->
+        <p>Here you can configure accounting settings.</p>
+                <!-- Additional content with Material components -->
+                <div class="input-container" id="Check3">
+                  <mat-checkbox [(ngModel)]="option1Value" (change)="myFunction3()" style="font-size: 14px;">
+                    Inclure parametrage dans la facturation
+                  </mat-checkbox>
+                </div>
+        <table mat-table [dataSource]="sorteddosspasencorevalide" class="mat-elevation-z8">
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef> Prenom </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="mois">
+            <th mat-header-cell *matHeaderCellDef> Mois </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.nature === 'Déclaration Mensuelle' || element.nature === 'comptabilite'">
+                {{element.mois}}
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="annee">
+            <th mat-header-cell *matHeaderCellDef> Annee </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.nature === 'Déclaration Mensuelle' || element.nature === 'comptabilite'">
+                {{element.annee}}
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.nature === 'Déclaration Mensuelle' || element.nature === 'comptabilite'">
+                {{element.nature}}
+              </ng-container>
+              <ng-container *ngIf="element.type === 'candidature'">
+                {{element.type}}
+              </ng-container>
+              <ng-container *ngIf="element.type === 'réclamation'">
+                {{element.type}}
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="origine">
+            <th mat-header-cell *matHeaderCellDef> Origine </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.nature === 'Déclaration Mensuelle'">
+                {{element.origine}}
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="created">
+            <th mat-header-cell *matHeaderCellDef> Date de creation
+              <button mat-icon-button [appSort]="dosspasencorevalide" data-order="desc" data-name="created">
+                <mat-icon>sort</mat-icon>
+              </button>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.created}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updated">
+            <th mat-header-cell *matHeaderCellDef> Date de modification </th>
+            <td mat-cell *matCellDef="let element"> {{element.updated}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="confirmation">
+            <th mat-header-cell *matHeaderCellDef> Confirmation </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <mat-checkbox id="{{ 'check' + i }}" [(ngModel)]="element.confirmed"></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div id="bodycontainer2" *ngIf="user.activite!='Syndic des copropriétaires'">
+          <div class="container-fluid"> 
+              <fieldset>
+                  <legend>Paramêtrage comptable</legend>
+                  <mat-tab-group (selectedTabChange)="onTabClicksections($event)">
+                      <!-- Tabs content would go here -->
+                      <mat-tab label="Edition note honoraire">
+                        <ng-template mat-tab-label>
+                          <div class="col" style="margin-left: 20px;">Edition note honoraire</div>
+                        </ng-template>
+                      
+                        <table class="mat-elevation-z8" id="editionnotesection" [formGroup]="editionnoteform">
+                          <thead>
+                            <tr>
+                              <th>Journal</th>
+                              <th>Compte DT</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Journal</mat-label>
+                                  <input matInput formControlName="journal" placeholder="Journal" />
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Compte DT</mat-label>
+                                  <input matInput formControlName="cptedt" placeholder="Compte DT" />
+                                </mat-form-field>
+                              </td>
+                            </tr>
+                          </tbody>
+                      
+                          <thead>
+                            <tr>
+                              <th>Taux TVA</th>
+                              <th>Compte hors taxe</th>
+                              <th>Compte TVA</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts">
+                            <ng-container *ngFor="let ammount of ammountControls; let i = index" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Taux TVA</mat-label>
+                                    <mat-select formControlName="taux" placeholder="Sélectionner Taux TVA">
+                                      <mat-option *ngFor="let tau of taux" [value]="tau">{{ tau }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte hors taxe</mat-label>
+                                    <input matInput formControlName="cpteht" placeholder="Compte hors taxe" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte TVA</mat-label>
+                                    <input matInput formControlName="cptetva" placeholder="Compte TVA" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                            <tr>
+                              <td colspan="4">
+                                <button mat-raised-button color="primary" type="button" (click)="addammount()">Ajouter ligne</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                      
+                          <thead>
+                            <tr>
+                              <th>Client</th>
+                              <th>Compte TTC</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts1">
+                            <ng-container *ngFor="let ammount of ammountControls1; let i = index" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Client</mat-label>
+                                    <mat-select formControlName="client" placeholder="Sélectionner Client">
+                                      <mat-option *ngFor="let cl of settedclients" [value]="cl.cl">{{ cl.cl }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte TTC</mat-label>
+                                    <input matInput formControlName="cptettc" placeholder="Compte TTC" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount1(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                        </table>
+                      </mat-tab>
+                      <mat-tab label="Recette journalière">
+                        <ng-template mat-tab-label style="padding: 3px;">
+                          <div class="col" style="margin-left: 20px;">Recette journalière</div>
+                        </ng-template>
+                      
+                        <table class="mat-elevation-z8" id="editionnotesection" [formGroup]="recetteform">
+                          <thead>
+                            <tr>
+                              <th>Journal</th>
+                              <th>Compte DT</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Journal</mat-label>
+                                  <input matInput formControlName="journal" placeholder="Journal" />
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Compte DT</mat-label>
+                                  <input matInput formControlName="cptedt" placeholder="Compte DT" />
+                                </mat-form-field>
+                              </td>
+                            </tr>
+                          </tbody>
+                      
+                          <thead>
+                            <tr>
+                              <th>Taux TVA</th>
+                              <th>Compte hors taxe</th>
+                              <th>Compte TVA</th>
+                              <th>Compte TTC</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts2">
+                            <ng-container *ngFor="let ammount of ammountControls2; let i = index" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Taux TVA</mat-label>
+                                    <mat-select formControlName="taux" (selectionChange)="verifyfutur($event, i)">
+                                      <mat-option *ngFor="let tau of taux" [value]="tau">{{ tau }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte hors taxe</mat-label>
+                                    <input matInput formControlName="cpteht" placeholder="Compte hors taxe" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte TVA</mat-label>
+                                    <input matInput formControlName="cptetva" placeholder="Compte TVA" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte TTC</mat-label>
+                                    <input matInput formControlName="cptettc" placeholder="Compte TTC" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount2(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                            <tr>
+                              <td colspan="5">
+                                <button mat-raised-button color="primary" type="button" (click)="addammount2()">
+                                  <mat-icon>add_circle</mat-icon> Ajouter ligne
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </mat-tab>
+                      <mat-tab label="Achat">
+                        <ng-template mat-tab-label style="padding: 3px;">
+                          <div class="col" style="margin-left: 20px;">Achat</div>
+                        </ng-template>
+                      
+                        <table class="mat-elevation-z8" id="editionnotesection" [formGroup]="achatform">
+                          <thead>
+                            <tr>
+                              <th>Journal</th>
+                              <th>Compte DT</th>
+                              <th>Compte TVA</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Journal</mat-label>
+                                  <input matInput formControlName="journal" placeholder="Journal" />
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Compte DT</mat-label>
+                                  <input matInput formControlName="cptedt" placeholder="Compte DT" />
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Compte TVA</mat-label>
+                                  <input matInput formControlName="cptetva" placeholder="Compte TVA" />
+                                </mat-form-field>
+                              </td>
+                            </tr>
+                          </tbody>
+                      
+                          <thead>
+                            <tr>
+                              <th>Fournisseur</th>
+                              <th>Compte TTC</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts3">
+                            <ng-container *ngFor="let ammount of ammountControls3; let i = index" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Fournisseur</mat-label>
+                                    <mat-select formControlName="fournisseur">
+                                      <mat-option *ngFor="let fou of settedfournisseurs" [value]="fou.four">{{ fou.four }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte TTC</mat-label>
+                                    <input matInput formControlName="cptettc" placeholder="Compte TTC" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount3(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                      
+                          <thead>
+                            <tr>
+                              <th>Nature Achat</th>
+                              <th>Compte HT</th>
+                              <th>Compte HT Devise</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts4">
+                            <ng-container *ngFor="let ammount of ammountControls4; let i = index" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Nature Achat</mat-label>
+                                    <mat-select formControlName="natureachat" (selectionChange)="verifyfutur($event, i)">
+                                      <mat-option *ngFor="let na of settednatures" [value]="na.nat">{{ na.nat }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte HT</mat-label>
+                                    <input matInput formControlName="cpteht" placeholder="Compte HT" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte HT Devise</mat-label>
+                                    <input matInput formControlName="cptehtdevise" placeholder="Compte HT Devise" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount4(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                        </table>
+                      </mat-tab>
+                      <mat-tab label="Relevé manuel">
+                        <ng-template mat-tab-label style="padding: 3px;">
+                          <div class="col" style="margin-left: 20px;">Relevé manuel</div>
+                        </ng-template>
+                        
+                        <table class="mat-elevation-z8" id="relevesection" [formGroup]="releveform">
+                          <thead>
+                            <tr>
+                              <th>Banque</th>
+                              <th>Numéro de compte</th>
+                              <th>Compte</th>
+                              <th>Journal</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts5">
+                            <ng-container *ngFor="let ammount of ammountControls5; let i = index;" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Banque</mat-label>
+                                    <input matInput formControlName="banque" placeholder="Banque" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Numéro de compte</mat-label>
+                                    <mat-select formControlName="numerocompte">
+                                      <mat-option *ngFor="let nu of settednumeros" [value]="nu.num">{{ nu.num }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte</mat-label>
+                                    <input matInput formControlName="cpte" placeholder="Compte" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Journal</mat-label>
+                                    <input matInput formControlName="journalmanuel" placeholder="Journal" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount5(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                          
+                          <thead>
+                            <tr>
+                              <th>Objet opération</th>
+                              <th>Compte</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts6">
+                            <ng-container *ngFor="let ammount of ammountControls6; let i = index;" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Objet opération</mat-label>
+                                    <mat-select formControlName="objet" (selectionChange)="verifyfutur($event, i)">
+                                      <mat-option *ngFor="let na of settedobjets" [value]="na">{{ na }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Compte</mat-label>
+                                    <input matInput formControlName="cpte" placeholder="Compte" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount6(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                        </table>
+                      </mat-tab>
+                      <mat-tab label="Salaire">
+                        <ng-template mat-tab-label style="padding: 3px;">
+                          <div class="col" style="margin-left: 20px;">Salaire</div>
+                        </ng-template>
+                        
+                        <table class="mat-elevation-z8" id="salairessection" [formGroup]="salaireform">
+                          <thead>
+                            <tr>
+                              <th>Employé</th>
+                              <th>Salaire Brut</th>
+                              <th>Salaire Net</th>
+                              <th>Journal</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody formArrayName="ammounts7">
+                            <ng-container *ngFor="let ammount of ammountControls7; let i = index;" [formGroupName]="i">
+                              <tr>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Employé</mat-label>
+                                    <mat-select formControlName="employe">
+                                      <mat-option *ngFor="let emp of settedemployes" [value]="emp.id">{{ emp.name }}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Salaire Brut</mat-label>
+                                    <input matInput formControlName="salairebrut" placeholder="Salaire Brut" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Salaire Net</mat-label>
+                                    <input matInput formControlName="salaireNet" placeholder="Salaire Net" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Journal</mat-label>
+                                    <input matInput formControlName="journal" placeholder="Journal" />
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <button mat-icon-button color="warn" (click)="removeammount7(i)">
+                                    <mat-icon>remove_circle</mat-icon>
+                                  </button>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                        </table>
+                      </mat-tab>
+                                                                                                                
+                  </mat-tab-group>
+              </fieldset>             
+          </div>
+      </div>
+      <div id="bodycontainer2" *ngIf="user.activite=='Syndic des copropriétaires'">
+        <div class="container-fluid">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Paramêtrage comptable</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-tab-group (selectedTabChange)="onTabClicksections($event)">
+                <mat-tab label="Copropriétaires">
+                  <ng-template mat-tab-label>
+                    <div class="col" style="margin-left: 20px;">Copropriétaires</div>
+                  </ng-template>
+                
+                  <table class="table table-striped" id="editionnotesection" [formGroup]="editionnoteform">
+                    <thead>
+                      <tr>
+                        <th>Journal</th>
+                        <th>Total copropriétaires</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Journal</mat-label>
+                            <input matInput formControlName="journalcop" placeholder="Journal" />
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Total montant</mat-label>
+                            <input matInput formControlName="total" placeholder="Total montant" />
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                    </tbody>
+                
+                    <thead>
+                      <tr>
+                        <th>Copropriétaires</th>
+                        <th>Compte</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="ammounts10">
+                      <tr *ngFor="let ammount of ammountControls10; let i = index;" [formGroupName]="i">
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Copropriétaire</mat-label>
+                            <mat-select formControlName="coproprietaire" placeholder="Sélectionner copropriétaire">
+                              <mat-option *ngFor="let cl of user.coproprietaires" [value]="cl.numero">{{ cl.numero }} {{ cl.coproprietaire }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Compte</mat-label>
+                            <input matInput formControlName="cpte" placeholder="Compte TTC" />
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <button mat-icon-button color="warn" (click)="removeammount10(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                
+                <mat-tab label="Etat de recette">
+                  <ng-template mat-tab-label>
+                    <div class="col" style="margin-left: 20px;">Etat de recette</div>
+                  </ng-template>
+                  
+                  <table class="table table-striped" id="editionnotesection" [formGroup]="editionnoteform">
+                    <thead>
+                      <tr>
+                        <th>Journal numérotés</th>
+                        <th>Journal non numérotés</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Journal numérotés</mat-label>
+                            <input matInput formControlName="journal" placeholder="Journal numérotés" />
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Journal non numérotés</mat-label>
+                            <input matInput formControlName="journalnon" placeholder="Journal non numérotés" />
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                    </tbody>
+                    
+                    <thead>
+                      <tr>
+                        <th>Nature recette numérotés</th>
+                        <th>Compte</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="ammounts8">
+                      <tr *ngFor="let ammount of ammountControls8; let i = index;" [formGroupName]="i">
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Nature recette numérotés</mat-label>
+                            <mat-select formControlName="nature" placeholder="Sélectionner nature">
+                              <mat-option *ngFor="let nat of settedcopnatures" [value]="nat">{{ nat }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Compte</mat-label>
+                            <input matInput formControlName="cpte" placeholder="Compte" />
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <button mat-icon-button color="warn" (click)="removeammount8(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                
+                    <thead>
+                      <tr>
+                        <th>Nature recette non numérotés</th>
+                        <th>Compte</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="ammounts0">
+                      <tr *ngFor="let ammount of ammountControls0; let i = index;" [formGroupName]="i">
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Nature recette non numérotés</mat-label>
+                            <mat-select formControlName="nature" placeholder="Sélectionner nature">
+                              <mat-option *ngFor="let nat of settedcopnaturesnon" [value]="nat">{{ nat }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Compte</mat-label>
+                            <input matInput formControlName="cpte" placeholder="Compte" />
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <button mat-icon-button color="warn" (click)="removeammount0(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                
+                  <div class="mt-3">
+                    <button mat-raised-button color="primary" (click)="addammount8()">
+                      <mat-icon>add</mat-icon>
+                      Ajouter nature recette numérotés
+                    </button>
+                    <button mat-raised-button color="primary" (click)="addammount0()">
+                      <mat-icon>add</mat-icon>
+                      Ajouter nature recette non numérotés
+                    </button>
+                  </div>
+                </mat-tab>
+                
+                                
+              </mat-tab-group>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+      </div>
+      </div>
+      <button class="btn btn-success" (click)="saveparam($event)"><i class="fa fa-refresh fa-spin"*ngIf="loading"></i>Valider</button>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>
